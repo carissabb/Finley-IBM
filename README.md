@@ -1,4 +1,4 @@
-# <img src="assets/finbuddy.png" alt="Finley Logo" width="60"/> Finley - Your Financial Friend  
+# <img src="../assets/finbuddy.png" alt="Finley Logo" width="60"/> Finley - Your Financial Friend  
 ### IBM watsonx AI Experiential Learning Lab | Challenge 3: Expenditure Patterns & Financial Planning  
 
 ---
