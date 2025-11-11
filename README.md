@@ -46,7 +46,7 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 
 ### 1️⃣ Clone the repository  
 ```bash
-git clone https://github.com/YOUR_USERNAME/finley.git
+git clone https://github.com/carissabb/Finley-IBM.git
 cd finley
 ```
 ---
@@ -65,7 +65,6 @@ VITE_AGENT_API_KEY="your-secret-key"
 ```
 
 > ⚠️ **Never commit your `.env` file.** It’s already ignored via `.gitignore`.  
-> Instead, commit a safe `.env.example` with placeholder values.
 
 ---
 
