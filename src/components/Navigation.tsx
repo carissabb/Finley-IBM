@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import finImg from '../assets/finbuddy.png';
 
 export default function Navigation() {
   const location = useLocation();
@@ -8,7 +9,18 @@ export default function Navigation() {
   return (
     <nav className="navigation">
       <div className="nav-brand">
-        <span className="nav-logo">🌟</span>
+        <span className="nav-logo">
+          <img
+            src={finImg}
+            alt="Finley logo"
+            style={{
+              width: '40px',
+              height: '50px',
+              verticalAlign: 'middle',
+              marginRight: '4px'
+            }}
+          />
+        </span>
         <span className="nav-title">Finley</span>
       </div>
       <div className="nav-links">
