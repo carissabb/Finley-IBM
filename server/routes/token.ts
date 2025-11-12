@@ -14,12 +14,10 @@ interface IamTokenResponse {
 
 router.post("/token", async (req, res) => {
   try {
-    console.log("🔑 API Key:", process.env.AGENT_API_KEY); // Add this in token.ts
-
     const response = await fetch("https://iam.cloud.ibm.com/identity/token", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=${process.env.VITE_AGENT_API_KEY}`
+      body: `grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=${process.env.AGENT_API_KEY}`
     });
 
     if (!response.ok) {

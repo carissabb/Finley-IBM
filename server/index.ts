@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 import tokenRoute from "./routes/token.ts";
 import finleyRoute from './routes/finley.ts';
 
-
-
 dotenv.config();
 
 const app = express();
@@ -19,4 +17,6 @@ app.use('/api/finley', finleyRoute);
 
 app.listen(PORT, () => {
   console.log(`🚀 Backend running at http://localhost:${PORT}`);
+}).on('error', (err) => {
+  console.error("🔥 Server failed to start:", err);
 });

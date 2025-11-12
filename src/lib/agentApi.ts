@@ -1,4 +1,3 @@
-const AGENT_API_KEY = import.meta.env.VITE_AGENT_API_KEY || '';
 const IBM_PROJECT_ID = import.meta.env.VITE_IBM_PROJECT_ID || '';
 const IBM_MODEL_ID = import.meta.env.VITE_IBM_MODEL_ID || '';
 const AGENT_API_URL = import.meta.env.VITE_AGENT_API_URL || 'https://us-south.ml.cloud.ibm.com';
@@ -56,7 +55,7 @@ export async function sendMessageToFinley(message: string, conversationHistory: 
   try {
     const token = await getIamToken();
 
-    const res = await fetch(`${AGENT_API_URL}/ml/v1/text/generation`, {
+    const res = await fetch(`${AGENT_API_URL}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

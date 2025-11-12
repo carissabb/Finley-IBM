@@ -57,27 +57,29 @@ router.post('/', async (req, res) => {
 
     const token = await getIamToken(process.env.AGENT_API_KEY || '');
 
-    const ibmRes = await fetch('https://us-south.ml.cloud.ibm.com/v2/generation/text', {
-      method: 'POST',
-      headers: {
+    const ibmRes = await fetch('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/568dccee-ba2c-4bf7-b774-2dcb49ea7e9c/ai_service?version=2021-05-01', {
+    method: 'POST',
+    headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-        'ml.project_id': process.env.VITE_IBM_PROJECT_ID || ''
-      },
-      body: JSON.stringify({
+        'ml.project_id': process.env.IBM_PROJECT_ID || ''
+    },
+    body: JSON.stringify({
         model_id: process.env.IBM_MODEL_ID,
-        input: prompt,
+        input: [`User: ${prompt}\nAssistant:`],
         parameters: {
-          max_new_tokens: 300,
-          temperature: 0.4,
-          top_p: 0.9,
-          stop_sequences: ['\nUser:']
+        decoding_method: "sample",
+        max_new_tokens: 300,
+        temperature: 0.4,
+        top_p: 0.9,
+        stop_sequences: ['\nUser:']
         }
-      })
+    })
     });
 
     // Tell TypeScript exactly what to expect
     const data = (await ibmRes.json()) as IbmResponse;
+    console.log("🔍 IBM raw response:", data); //deletethis
 
     const reply =
       data?.results?.[0]?.generated_text ??
