@@ -49,7 +49,7 @@ function toPrompt(history: Message[], userText: string): string {
 
 // -------------------- Public API --------------------
 export async function sendMessageToFinley(message: string, conversationHistory: Message[]): Promise<string> {
-  if (!AGENT_API_KEY || !IBM_PROJECT_ID || !IBM_MODEL_ID) {
+  if (!IBM_PROJECT_ID || !IBM_MODEL_ID) {
     return "Hi! I'm Finley, your financial friend! 🌟 To connect with the real AI assistant, please configure your VITE_AGENT_API_URL and VITE_AGENT_API_KEY in the .env file. For now, I'm here to help you explore budgeting, saving, and achieving your financial goals!";
   }
 
@@ -57,7 +57,7 @@ export async function sendMessageToFinley(message: string, conversationHistory: 
     const token = await getIamToken();
 
     const res = await fetch(`${AGENT_API_URL}/ml/v1/text/generation`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

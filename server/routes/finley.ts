@@ -55,14 +55,14 @@ router.post('/', async (req, res) => {
         .map((m: any) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
         .join('\n') + `\nUser: ${message}\nAssistant:`;
 
-    const token = await getIamToken(process.env.IBM_API_KEY || '');
+    const token = await getIamToken(process.env.AGENT_API_KEY || '');
 
     const ibmRes = await fetch('https://us-south.ml.cloud.ibm.com/v2/generation/text', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-        'ml.project_id': process.env.IBM_PROJECT_ID || ''
+        'ml.project_id': process.env.VITE_IBM_PROJECT_ID || ''
       },
       body: JSON.stringify({
         model_id: process.env.IBM_MODEL_ID,
