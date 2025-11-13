@@ -47,39 +47,35 @@ async function getIamToken(apiKey: string): Promise<string> {
 
 // -------------------- Route --------------------
 router.post('/', async (req, res) => {
-  const { message, history } = req.body;
+  const { message, history = [] } = req.body;
 
   try {
-    const prompt =
-      (history || [])
-        .map((m: any) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
-        .join('\n') + `\nUser: ${message}\nAssistant:`;
-
     const token = await getIamToken(process.env.AGENT_API_KEY || '');
 
-    const ibmRes = await fetch('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/568dccee-ba2c-4bf7-b774-2dcb49ea7e9c/ai_service?version=2021-05-01', {
-    method: 'POST',
-    headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'ml.project_id': process.env.IBM_PROJECT_ID || ''
-    },
-    body: JSON.stringify({
-        model_id: process.env.IBM_MODEL_ID,
-        input: [`User: ${prompt}\nAssistant:`],
-        parameters: {
-        decoding_method: "sample",
-        max_new_tokens: 300,
-        temperature: 0.4,
-        top_p: 0.9,
-        stop_sequences: ['\nUser:']
-        }
-    })
-    });
+    // Combine history with new message
+    const messages = [
+      ...history,
+      { role: 'user', content: message }
+    ];
 
-    // Tell TypeScript exactly what to expect
+    const ibmRes = await fetch(
+      'https://us-south.ml.cloud.ibm.com/ml/v4/deployments/568dccee-ba2c-4bf7-b774-2dcb49ea7e9c/ai_service?version=2021-05-01',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        messages: [
+            { role: 'user', content: message }
+        ]
+        })
+      }
+    );
+
     const data = (await ibmRes.json()) as IbmResponse;
-    console.log("🔍 IBM raw response:", data); //deletethis
+    console.log('🔍 IBM raw response:', data);
 
     const reply =
       data?.results?.[0]?.generated_text ??
