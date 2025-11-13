@@ -69,11 +69,14 @@ router.post('/', async (req, res) => {
   try {
     const token = await getIamToken(process.env.AGENT_API_KEY || '');
 
+    console.log("📥 Incoming user message:", message);
+    console.log("🧠 Full history context:", history);
     // Combine history with new message
     const messages = [
       ...history,
       { role: 'user', content: message }
     ];
+    console.log("📤 Final messages payload to IBM:", JSON.stringify({ messages }, null, 2));
 
     const ibmRes = await fetch(
       'https://us-south.ml.cloud.ibm.com/ml/v4/deployments/568dccee-ba2c-4bf7-b774-2dcb49ea7e9c/ai_service?version=2021-05-01',

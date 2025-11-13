@@ -48,60 +48,23 @@ function toPrompt(history: Message[], userText: string): string {
 
 // -------------------- Public API --------------------
 export async function sendMessageToFinley(message: string, conversationHistory: Message[]): Promise<string> {
-  if (!IBM_PROJECT_ID || !IBM_MODEL_ID) {
-    return "Hi! I'm Finley, your financial friend! 🌟 To connect with the real AI assistant, please configure your VITE_AGENT_API_URL and VITE_AGENT_API_KEY in the .env file. For now, I'm here to help you explore budgeting, saving, and achieving your financial goals!";
-  }
-
   try {
-    const token = await getIamToken();
-
-    const res = await fetch(`${AGENT_API_URL}`, {
-      method: 'POST',
+    const res = await fetch("http://localhost:3001/api/finley", {
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'ml.project_id': IBM_PROJECT_ID
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model_id: IBM_MODEL_ID,
-        input: toPrompt(conversationHistory, message),
-        parameters: {
-          max_new_tokens: 300,
-          temperature: 0.4,
-          top_p: 0.9,
-          stop_sequences: ["\nUser:"]
-        }
+        message,
+        history: conversationHistory
       })
     });
 
-    if (!res.ok) {
-      throw new Error(`IBM watsonx.ai error: ${res.status} ${await res.text()}`);
-    }
-
-    const data = await res.json() as {
-      choices?: {
-        finish_reason: string;
-        index: number;
-        message: {
-          content: string;
-          role: string;
-        };
-      }[];
-      results?: { generated_text: string }[];
-      generated_text?: string;
-      output_text?: string;
-    };
-
-    const reply =
-      data.choices?.[0]?.message?.content ??
-      data.results?.[0]?.generated_text ??
-      data.generated_text ??
-      data.output_text ??
-      'Sorry, no response.';
-
-    return reply.trim();
+    const data = await res.json();
+    return data?.choices?.[0]?.message?.content ?? "Sorry, no response.";
   } catch (err) {
     console.error("Finley error:", err);
-    return "Hmm, I had trouble reaching the model. Double-check the IBM credentials in your .env.";
+    return "Hmm, I had trouble reaching the backend.";
   }
 }
+
