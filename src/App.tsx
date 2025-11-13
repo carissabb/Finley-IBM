@@ -7,6 +7,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import ExpensesPage from './pages/Expenses';
 
 function App() {
 	return (
@@ -25,8 +26,9 @@ function AppContent() {
 			<Route path="/" element={<HomePage />} />
 			<Route path="/dashboard" element={<DashboardPage />} />
 			<Route path="/chat" element={<Chat />} />
-			<Route path="/login" element={<LoginPage />} />
 			<Route path="/budget" element={<BudgetTracker />} />
+			<Route path="/login" element={<LoginPage />} />
+			<Route path="/expenses" element={<ExpensesPage />} />
 			<Route path="/achievements" element={<Achievements />} />
 		</Routes>
 	);

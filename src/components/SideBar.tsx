@@ -18,7 +18,7 @@ type UserProfile = Database['public']['Tables']['user_profiles']['Row'];
 const navItems = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/chat', label: 'Chat', icon: MessageCircle },
-  { to: '/budget', label: 'Budget', icon: PiggyBank },
+  { to: '/expenses', label: 'Expenses', icon: PiggyBank },
   { to: '/achievements', label: 'Achievements', icon: Trophy }
 ];
 
