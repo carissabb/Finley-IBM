@@ -48,7 +48,7 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 ### 1️⃣ Clone the repository  
 ```bash
 git clone https://github.com/carissabb/Finley-IBM.git
-cd finley
+cd Finley-IBM
 ```
 ---
 
