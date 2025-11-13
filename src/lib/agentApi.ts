@@ -79,15 +79,25 @@ export async function sendMessageToFinley(message: string, conversationHistory: 
     }
 
     const data = await res.json() as {
+      choices?: {
+        finish_reason: string;
+        index: number;
+        message: {
+          content: string;
+          role: string;
+        };
+      }[];
       results?: { generated_text: string }[];
       generated_text?: string;
       output_text?: string;
     };
 
-    const reply = data?.results?.[0]?.generated_text
-      ?? data?.generated_text
-      ?? data?.output_text
-      ?? "Sorry, I don't have an answer right now.";
+    const reply =
+      data.choices?.[0]?.message?.content ??
+      data.results?.[0]?.generated_text ??
+      data.generated_text ??
+      data.output_text ??
+      'Sorry, no response.';
 
     return reply.trim();
   } catch (err) {

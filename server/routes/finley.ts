@@ -16,9 +16,26 @@ interface IamTokenResponse {
 
 // IBM model inference response
 interface IbmResponse {
-  results?: { generated_text?: string }[];
-  generated_text?: string;
-  output_text?: string;
+  choices: {
+    index: number;
+    finish_reason: string;
+    message: {
+      role: string;
+      content: string;
+    };
+  }[];
+  created?: number;
+  created_at?: string;
+  id?: string;
+  model?: string;
+  model_id?: string;
+  model_version?: string;
+  object?: string;
+  usage?: {
+    completion_tokens: number;
+    prompt_tokens: number;
+    total_tokens: number;
+  };
 }
 
 // -------------------- IAM Token --------------------
@@ -75,15 +92,24 @@ router.post('/', async (req, res) => {
     );
 
     const data = (await ibmRes.json()) as IbmResponse;
-    console.log('🔍 IBM raw response:', data);
+    console.log('🔍 IBM full raw response:', JSON.stringify(data, null, 2)); // delete this
 
     const reply =
-      data?.results?.[0]?.generated_text ??
-      data?.generated_text ??
-      data?.output_text ??
-      'Sorry, no response.';
+    data?.choices?.[0]?.message?.content ||
+    data?.choices?.[0]?.message ||
+    JSON.stringify(data) ||
+    'Sorry, no response.';
 
-    res.json({ reply });
+    res.json({
+        choices: [
+            {
+            message: {
+                content: reply
+            }
+            }
+        ]
+    });
+
   } catch (err) {
     console.error('Finley backend error:', err);
     res.status(500).json({ error: 'Failed to fetch response from IBM model.' });
