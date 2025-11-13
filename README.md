@@ -34,11 +34,12 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 
 ## 🧩 Tech Stack  
 
-- **Vite + React + TailwindCSS** – Front-end framework and styling  
-- **Node / Express (API Proxy)** – Backend route to connect to Finley’s AI model  
-- **IBM watsonx.ai & watsonx Orchestrate** – AI backend that powers Finley’s responses  
-- **Chart.js / Recharts (optional)** – For visual spending insights  
-- **.env configuration** – Securely stores API keys and environment variables  
+### 🛠️ Tech Stack
+
+- **Vite + React + TailwindCSS** – Front-end framework and styling
+- **Node + Express (API Proxy)** – Backend route to securely forward user messages to IBM's AI model
+- **IBM watsonx.ai (Granite 3B)** – The AI model behind Finley's financial responses, connected via an ML deployment endpoint
+- **.env Configuration** – Securely stores API keys and environment variables for local development
 
 ---
 
@@ -61,6 +62,8 @@ npm install
 Create a file named `.env` in the project root:
 ```bash
 VITE_AGENT_API_URL="https://your-api-endpoint"
+VITE_IBM_PROJECT_ID="your-ibm-project-id"
+VITE_IBM_MODEL_ID=ibm/"your-ibm-model-id"
 VITE_AGENT_API_KEY="your-secret-key"
 ```
 
@@ -68,7 +71,15 @@ VITE_AGENT_API_KEY="your-secret-key"
 
 ---
 
-### 4️⃣ Run the development server
+### 4️⃣ Run the express server
+```bash
+npm run backend
+```
+The backend will start on **http://localhost:3001** (or whichever port your terminal shows).
+
+---
+
+### 5️⃣ Run the development server
 ```bash
 npm run dev
 ```
@@ -95,10 +106,10 @@ Finley makes finance **personal, friendly, and motivating** — turning “budge
 
 ## 👩‍💻 Contributors
 
-- **Carissa Bostian** – Team Lead / AI Integration  
-- **Shannon Brooks** – Frontend Development  
-- **Sai Prasad Thalluri** – Data & Analytics  
-- **Hyungmin Kim** – UI/UX Design  
+- **Carissa Bostian** – Team Lead / Full-Stack Development / API Integration / AI Prompt Engineer 
+- **Shannon Brooks** – User Research 
+- **Sai Prasad Thalluri** – Data Exploration  
+- **Hyungmin Kim** – Visual Design Strategy  
 - **Atticus** – AI Workflow Support  
 
 ---
