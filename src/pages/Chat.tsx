@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { sendMessageToFinley, type Message } from '../lib/agentApi';
+import ReactMarkdown from 'react-markdown';
 
 const QUICK_START_TOPICS = [
   { id: 'budgeting', label: '💰 Help me budget', prompt: 'Can you help me create a budget?' },
@@ -88,7 +89,7 @@ export default function Chat() {
             className={`message ${message.role === 'user' ? 'message-user' : 'message-assistant'}`}
           >
             <div className="message-bubble">
-              {message.content}
+              <ReactMarkdown>{message.content}</ReactMarkdown>
             </div>
             <div className="message-time">
               {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
