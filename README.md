@@ -36,8 +36,8 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 
 ### 🛠️ Tech Stack
 
-- **Vite + React + TailwindCSS** – Front-end framework and styling
-- **Node + Express (API Proxy)** – Backend route to securely forward user messages to IBM's AI model
+- **Vite + React + TypeScript + TailwindCSS** – Front-end framework and styling
+- **Node.js + Express (API Proxy)** – Backend route to securely forward user messages to IBM's AI model
 - **IBM watsonx.ai (Granite 3B)** – The AI model behind Finley's financial responses, connected via an ML deployment endpoint
 - **.env Configuration** – Securely stores API keys and environment variables for local development
 
