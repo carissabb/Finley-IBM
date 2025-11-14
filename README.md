@@ -61,10 +61,12 @@ npm install
 ### 3️⃣ Set up environment variables
 Create a file named `.env` in the project root:
 ```bash
+VITE_SUPABASE_URL=your_supabase_url_here
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 VITE_AGENT_API_URL="https://your-api-endpoint"
 VITE_IBM_PROJECT_ID="your-ibm-project-id"
 VITE_IBM_MODEL_ID=ibm/"your-ibm-model-id"
-VITE_AGENT_API_KEY="your-secret-key"
+AGENT_API_KEY="your-secret-key"
 ```
 
 > ⚠️ **Never commit your `.env` file.** It’s already ignored via `.gitignore`.  
