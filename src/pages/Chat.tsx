@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Send, MessageSquarePlus } from 'lucide-react';
-import { sendMessageToFinley, type Message } from '../lib/agentApi';
+import { sendMessageToFinley, type Message, type ConversationTurn } from '../lib/agentApi';
 
 const QUICK_START_TOPICS = [
   { id: 'budgeting', label: '💰 Build a Budget', prompt: 'How do I make a budget that I’ll actually stick to?' },
@@ -10,14 +10,15 @@ const QUICK_START_TOPICS = [
   { id: 'motivation', label: '✨ New to Money', prompt: 'I just got my first job! What should I do with my first paycheck?' },
 ];
 
+const INITIAL_ASSISTANT_MESSAGE: Message = {
+  role: 'assistant',
+  content:
+    "Hi there! I'm Finley, your financial friend! 🌟 I'm here to help you build healthy money habits, create budgets, and reach your financial goals. What would you like to talk about today?",
+  timestamp: new Date(),
+};
+
 export default function Chat() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: "Hi there! I'm Finley, your financial friend! 🌟 I'm here to help you build healthy money habits, create budgets, and reach your financial goals. What would you like to talk about today?",
-      timestamp: new Date(),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([INITIAL_ASSISTANT_MESSAGE]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -40,12 +41,17 @@ export default function Chat() {
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    const updatedConversation = [...messages, userMessage];
+    setMessages(updatedConversation);
     setInputValue('');
     setIsTyping(true);
 
     try {
-      const response = await sendMessageToFinley(messageText, messages);
+      const conversationHistory: ConversationTurn[] = updatedConversation.map(({ role, content }) => ({
+        role,
+        content,
+      }));
+      const response = await sendMessageToFinley(messageText, conversationHistory);
 
       const assistantMessage: Message = {
         role: 'assistant',
