@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ExpensesPage from './pages/Expenses';
+import SignupPage from './pages/SignupPage';
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function AppContent() {
 			<Route path="/chat" element={<Chat />} />
 			<Route path="/budget" element={<BudgetTracker />} />
 			<Route path="/login" element={<LoginPage />} />
+  			<Route path="/signup" element={<SignupPage />} />
 			<Route path="/expenses" element={<ExpensesPage />} />
 			<Route path="/achievements" element={<Achievements />} />
 		</Routes>

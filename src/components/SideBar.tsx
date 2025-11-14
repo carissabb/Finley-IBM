@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import {
   ChevronsLeft,
   ChevronsRight,
@@ -33,11 +33,10 @@ export default function SideBar() {
 
     const fetchProfile = async () => {
       setLoadingProfile(true);
+
       try {
         const { data, error } = await supabase.auth.getSession();
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
         const user = data.session?.user;
         if (!user) {
@@ -48,25 +47,40 @@ export default function SideBar() {
 
         setUserEmail(user.email ?? null);
 
-        const { data: profileData, error: profileError } = await supabase
+        // --- AUTO-CREATE PROFILE ON FIRST LOGIN ---
+        const { data: profileData } = await supabase
           .from('user_profiles')
           .select('display_name')
           .eq('id', user.id)
           .maybeSingle();
 
-        if (profileError) {
-          throw profileError;
+        let finalProfile = profileData;
+
+        // If no profile exists → create one automatically
+        if (!profileData) {
+          const defaultName = user.email?.split('@')[0] ?? 'New Finley User';
+
+          const { data: created, error: createError } = await supabase
+            .from('user_profiles')
+            .insert({
+              id: user.id,
+              display_name: defaultName,
+            })
+            .select('display_name')
+            .maybeSingle();
+
+          if (!createError) {
+            finalProfile = created;
+          } else {
+            console.error('Failed to auto-create profile:', createError);
+          }
         }
 
-        if (!active) {
-          return;
-        }
+        if (!active) return;
+        setProfile(finalProfile);
 
-        setProfile(profileData);
       } catch (err) {
-        if (!active) {
-          return;
-        }
+        if (!active) return;
         console.error('Unable to load profile', err);
         setProfile(null);
         setUserEmail(null);
@@ -101,6 +115,7 @@ export default function SideBar() {
         collapsed ? 'w-20 px-2' : 'w-full max-w-xs px-4'
       }`}
     >
+      {/* --- TOP LOGO + COLLAPSE BUTTON --- */}
       <div>
         {collapsed ? (
           <div className="mb-8 flex justify-center">
@@ -122,18 +137,18 @@ export default function SideBar() {
               aria-label="Collapse sidebar"
             >
               <ChevronsLeft className="h-4 w-4" />
-              <span className="sr-only">Collapse sidebar</span>
             </button>
-          <div className="flex items-center gap-3 pr-10">
-            <img src={finImg} alt="Finley logo" className="h-12 w-12" />
-            <div>
-              <p className="text-lg font-bold text-gray-900">Finley</p>
+            <div className="flex items-center gap-3 pr-10">
+              <img src={finImg} alt="Finley logo" className="h-12 w-12" />
+              <div>
+                <p className="text-lg font-bold text-gray-900">Finley</p>
                 <p className="text-sm text-gray-500">Financial flow, grounded</p>
               </div>
             </div>
           </div>
         )}
 
+        {/* --- NAVIGATION --- */}
         <nav className="space-y-2">
           {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink
@@ -159,6 +174,7 @@ export default function SideBar() {
         </nav>
       </div>
 
+      {/* --- BOTTOM USER SECTION --- */}
       <div
         className={`rounded-2xl px-4 py-3 transition-all duration-300 ${
           collapsed ? 'flex items-center justify-center px-2 py-2' : ''
@@ -176,14 +192,33 @@ export default function SideBar() {
               </AvatarFallback>
             )}
           </Avatar>
+
           {!collapsed && (
             <div className="flex-1">
-              <p className="text-sm font-semibold text-gray-900">
-                {profile?.display_name || userEmail || 'Guest Explorer'}
-              </p>
-              <p className="text-xs text-gray-500">
-                {userEmail || 'Sign in to sync achievements'}
-              </p>
+              {profile?.display_name || userEmail ? (
+                <>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {profile?.display_name || userEmail}
+                  </p>
+                  <p className="text-xs text-gray-500">Synced</p>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-sm font-semibold text-indigo-600 hover:underline"
+                  >
+                    Guest Explorer
+                  </Link>
+                  <br />
+                  <Link
+                    to="/login"
+                    className="text-xs text-indigo-500 hover:underline"
+                  >
+                    Sign in to sync achievements
+                  </Link>
+                </>
+              )}
             </div>
           )}
         </div>

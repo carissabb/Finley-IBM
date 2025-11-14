@@ -4,10 +4,10 @@ import { Send, MessageSquarePlus } from 'lucide-react';
 import { sendMessageToFinley, type Message } from '../lib/agentApi';
 
 const QUICK_START_TOPICS = [
-  { id: 'budgeting', label: '💰 Help me budget', prompt: 'Can you help me create a budget?' },
-  { id: 'saving', label: '🎯 Savings tips', prompt: 'What are some good ways to save money?' },
-  { id: 'investing', label: '📈 Investing basics', prompt: 'Can you explain investing for beginners?' },
-  { id: 'motivation', label: '✨ Motivate me!', prompt: 'I need some financial motivation!' },
+  { id: 'budgeting', label: '💰 Build a Budget', prompt: 'How do I make a budget that I’ll actually stick to?' },
+  { id: 'saving', label: '🎯 Savings tips', prompt: 'Is there a smart way to pay off debt, start saving, and still have money left for fun?' },
+  { id: 'investing', label: '📈 Investing basics', prompt: 'Can you explain investing for beginners in a simple way?' },
+  { id: 'motivation', label: '✨ New to Money', prompt: 'I just got my first job! What should I do with my first paycheck?' },
 ];
 
 export default function Chat() {

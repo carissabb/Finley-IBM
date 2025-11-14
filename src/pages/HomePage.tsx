@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DollarSign, TrendingUp, PieChart, Shield, Zap, Users, ChevronRight, Check, Menu, X } from 'lucide-react';
+import { Link } from "react-router-dom";
+
 
 export default function FinleyLanding() {
   const [scrolled, setScrolled] = useState(false);
@@ -79,9 +81,11 @@ export default function FinleyLanding() {
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-gray-700 hover:text-indigo-600 transition-colors">Features</a>
               <a href="#testimonials" className="text-gray-700 hover:text-indigo-600 transition-colors">Testimonials</a>
-              <button className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200">
+              <Link 
+                to="/Chat"
+                className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200">
                 Get Started
-              </button>
+              </Link>
             </div>
 
             <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -97,9 +101,11 @@ export default function FinleyLanding() {
               <a href="#features" className="block text-gray-700 hover:text-indigo-600">Features</a>
               <a href="#pricing" className="block text-gray-700 hover:text-indigo-600">Pricing</a>
               <a href="#testimonials" className="block text-gray-700 hover:text-indigo-600">Testimonials</a>
-              <button className="w-full px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg">
+              <Link 
+                to="/Chat"
+                className="w-full px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg">
                 Get Started
-              </button>
+              </Link>
             </div>
           </div>
         )}
@@ -118,10 +124,12 @@ export default function FinleyLanding() {
             Track expenses, manage budgets, and grow your wealth with Finley's intelligent financial platform
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
+            <Link
+              to="/Chat"
+              className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
 								Get Started
               <ChevronRight className="w-5 h-5" />
-            </button>
+            </Link>
             <button className="px-8 py-4 bg-white text-gray-700 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:border-indigo-600 hover:shadow-lg transition-all duration-300">
               Watch Demo
             </button>
@@ -249,9 +257,11 @@ export default function FinleyLanding() {
         <div className="max-w-4xl mx-auto text-center text-white">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Finances?</h2>
           <p className="text-xl mb-8 opacity-90">Join thousands of users who are already taking control of their financial future</p>
-          <button className="px-8 py-4 bg-white text-indigo-600 rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+          <Link 
+            to="/Chat"
+            className="px-8 py-4 bg-white text-indigo-600 rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
 						Get Started
-          </button>
+          </Link>
         </div>
       </section>
 

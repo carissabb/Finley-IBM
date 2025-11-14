@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, CheckCircle2, Lock, Mail, Shield, Sparkles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 export default function LoginPage() {
@@ -171,7 +171,9 @@ export default function LoginPage() {
                 <button type="button" className="text-indigo-600 hover:text-indigo-700">
                   Forgot password?
                 </button>
-                <button type="button" className="text-purple-600 hover:text-purple-700">
+                <button 
+                  onClick={() => navigate('/signup')}
+                  type="button" className="text-purple-600 hover:text-purple-700">
                   Create an account
                 </button>
               </div>
