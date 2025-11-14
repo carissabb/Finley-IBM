@@ -108,7 +108,7 @@ Finley makes finance **personal, friendly, and motivating** — turning “budge
 
 - **Carissa Bostian** – Team Lead / Full-Stack Development / API Integration / AI Prompt Engineer
 - **Sai Prasad Thalluri** – Data Ingestion / IBM Tooling Support
-- **Atticus** – Full-Stack Development / AI Workflow Support  
+- **Atticus Wong** – Full-Stack Development / AI Workflow Support  
 - **Shannon Brooks** – User Research 
 - **Hyungmin Kim** – Visual Design Strategy  
 
