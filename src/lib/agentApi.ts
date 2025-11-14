@@ -1,11 +1,17 @@
-export interface Message {
+export interface ConversationTurn {
   role: 'user' | 'assistant';
   content: string;
+}
+
+export interface Message extends ConversationTurn {
   timestamp: Date;
 }
 
 // -------------------- Public API --------------------
-export async function sendMessageToFinley(message: string, conversationHistory: Message[]): Promise<string> {
+export async function sendMessageToFinley(
+  message: string,
+  conversationHistory: ConversationTurn[]
+): Promise<string> {
   try {
     const res = await fetch("http://localhost:3001/api/finley", {
       method: "POST",
@@ -25,4 +31,3 @@ export async function sendMessageToFinley(message: string, conversationHistory: 
     return "Hmm, I had trouble reaching the backend.";
   }
 }
-
