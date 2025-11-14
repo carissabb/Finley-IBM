@@ -46,7 +46,7 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
   - Lightweight backend proxy for secure requests to IBM’s ML deployment
 
 ### **AI**
-- **IBM watsonx.ai (Granite 3B)**
+- **IBM watsonx.ai (Granite 8B)**
   - Powers Finley’s financial insights and assistant responses
 
 ### **Tooling**
