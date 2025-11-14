@@ -33,13 +33,27 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 ---
 
 ## 🧩 Tech Stack  
+### **Frontend**
+- **React + TypeScript (Vite)** — Fast, modern UI
+- **TailwindCSS** — Utility-first styling
+- **React Router** — Client-side navigation
+- **Lucide Icons** — Icon set for UI
 
-### 🛠️ Tech Stack
+### **Backend & Services**
+- **Supabase**
+  - Authentication (email/password + Google OAuth)
+  - Postgres database with Row-Level Security (RLS)
+  - Tables for user profiles, budgets, savings goals, achievements, expenses
 
-- **Vite + React + TypeScript + TailwindCSS** – Front-end framework and styling
-- **Node.js + Express (API Proxy)** – Backend route to securely forward user messages to IBM's AI model
-- **IBM watsonx.ai (Granite 3B)** – The AI model behind Finley's financial responses, connected via an ML deployment endpoint
-- **.env Configuration** – Securely stores API keys and environment variables for local development
+- **Node.js + Express**
+  - Lightweight backend proxy for secure requests to IBM’s ML deployment
+
+### **AI**
+- **IBM watsonx.ai (Granite 3B)**
+  - Powers Finley’s financial insights and assistant responses
+
+### **Tooling**
+- **Environment Variables (.env)** for Supabase + Watsonx keys
 
 ---
 
