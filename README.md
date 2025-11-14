@@ -103,9 +103,8 @@ The app will start on **http://localhost:5173** (or whichever port your terminal
 ## 🔒 Environment & Security
 
 - Keep all API keys and sensitive data in **`.env`** files (excluded from git).  
-- Replace placeholders in `.env.example` with your own credentials to connect Finley to IBM watsonx Orchestrate via API.  
+- Replace placeholders in `.env.example` with your own credentials in `.env` (create this file) to connect Finley to IBM watsonx Orchestrate via API.  
 - **Do not hardcode** secrets in the codebase; always read them from environment variables.  
-- If deploying publicly, use a **backend proxy** to keep your API key off the client side.  
 
 ---
 
@@ -113,7 +112,7 @@ The app will start on **http://localhost:5173** (or whichever port your terminal
 
 Built for **IBM’s AI Experiential Learning Lab (Challenge 3)** to show how AI can empower financial literacy and promote long-term wellness.  
 
-Finley makes finance **personal, friendly, and motivating** — turning “budgeting” into a journey of progress, not pressure.  
+Finley makes finance **personal, friendly, and motivating** — making budgeting feel simple, stress-free, and totally doable. 
 
 ---
 
