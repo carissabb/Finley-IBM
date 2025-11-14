@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
-import { sendMessageToFinley, type Message } from '../lib/agentApi';
 import ReactMarkdown from 'react-markdown';
+import { Send, MessageSquarePlus } from 'lucide-react';
+import { sendMessageToFinley, type Message } from '../lib/agentApi';
 
 const QUICK_START_TOPICS = [
-  { id: 'budgeting', label: '💰 Help me budget', prompt: 'Can you help me create a budget?' },
-  { id: 'saving', label: '🎯 Savings tips', prompt: 'What are some good ways to save money?' },
-  { id: 'investing', label: '📈 Investing basics', prompt: 'Can you explain investing for beginners?' },
-  { id: 'motivation', label: '✨ Motivate me!', prompt: 'I need some financial motivation!' },
+  { id: 'budgeting', label: '💰 Build a Budget', prompt: 'How do I make a budget that I’ll actually stick to?' },
+  { id: 'saving', label: '🎯 Savings tips', prompt: 'Is there a smart way to pay off debt, start saving, and still have money left for fun?' },
+  { id: 'investing', label: '📈 Investing basics', prompt: 'Can you explain investing for beginners in a simple way?' },
+  { id: 'motivation', label: '✨ New to Money', prompt: 'I just got my first job! What should I do with my first paycheck?' },
 ];
 
 export default function Chat() {
@@ -20,7 +21,7 @@ export default function Chat() {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -76,70 +77,104 @@ export default function Chat() {
   };
 
   return (
-    <div className="chat-container">
-      <div className="chat-header">
-        <h1>Chat with Finley</h1>
-        <p>Your encouraging financial assistant</p>
-      </div>
-
-      <div className="messages-container">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`message ${message.role === 'user' ? 'message-user' : 'message-assistant'}`}
-          >
-            <div className="message-bubble">
-              <ReactMarkdown>{message.content}</ReactMarkdown>
-            </div>
-            <div className="message-time">
-              {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </div>
-          </div>
-        ))}
-
-        {isTyping && (
-          <div className="message message-assistant">
-            <div className="message-bubble typing-indicator">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        )}
-
-        <div ref={messagesEndRef} />
-      </div>
-
-      <div className="quick-start-buttons">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-10 px-4">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
         {messages.length === 1 && (
-          <>
-            {QUICK_START_TOPICS.map(topic => (
-              <button
-                key={topic.id}
-                className="quick-start-btn"
-                onClick={() => handleQuickStart(topic.prompt)}
-              >
-                {topic.label}
-              </button>
-            ))}
-          </>
+          <section className="rounded-[32px] border border-white/60 bg-white/90 p-6 text-center shadow-2xl backdrop-blur">
+            <p className="text-sm font-semibold uppercase tracking-widest text-indigo-600">
+              Recommended Prompts
+            </p>
+            <p className="mt-2 text-base text-gray-600">
+              Choose a spark to start the conversation.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              {QUICK_START_TOPICS.map((topic) => (
+                <button
+                  key={topic.id}
+                  type="button"
+                  onClick={() => handleQuickStart(topic.prompt)}
+                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-indigo-200 hover:text-indigo-600"
+                >
+                  <MessageSquarePlus className="h-4 w-4 text-indigo-500" />
+                  {topic.label}
+                </button>
+              ))}
+            </div>
+          </section>
         )}
-      </div>
 
-      <form onSubmit={handleSubmit} className="chat-input-form">
-        <input
-          ref={inputRef}
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Ask Finley anything about finances..."
-          className="chat-input"
-          disabled={isTyping}
-        />
-        <button type="submit" className="chat-send-btn" disabled={isTyping || !inputValue.trim()}>
-          Send
-        </button>
-      </form>
+        <section className="flex flex-1 flex-col rounded-[32px] border border-white/60 bg-white/90 p-6 shadow-xl backdrop-blur">
+          <div className="flex-1 overflow-y-auto rounded-2xl bg-gradient-to-br from-white to-indigo-50/40 p-6 shadow-inner">
+            {messages.map((message, index) => {
+              const isUser = message.role === 'user';
+              return (
+                <div key={index} className={`mb-6 flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-5 py-4 text-sm shadow-lg ${
+                      isUser
+                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                        : 'bg-white/90 text-gray-800'
+                    }`}
+                  >
+                    <ReactMarkdown>
+                      {message.content}
+                    </ReactMarkdown>
+                    <p
+                      className={`mt-3 text-xs ${
+                        isUser ? 'text-white/70' : 'text-gray-500'
+                      }`}
+                    >
+                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-gray-600 shadow">
+                  Finley is thinking
+                  <span className="ml-2 inline-flex items-center">
+                    <span className="mx-0.5 h-2 w-2 animate-bounce rounded-full bg-indigo-400" />
+                    <span className="mx-0.5 h-2 w-2 animate-bounce rounded-full bg-indigo-400 [animation-delay:150ms]" />
+                    <span className="mx-0.5 h-2 w-2 animate-bounce rounded-full bg-indigo-400 [animation-delay:300ms]" />
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
+
+          <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+            <div className="rounded-3xl border border-gray-200 bg-white shadow-inner">
+              <textarea
+                ref={inputRef}
+                rows={3}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Ask Finley anything about budgets, goals, or money wins..."
+                className="h-full w-full resize-none rounded-3xl bg-transparent px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none"
+                disabled={isTyping}
+              />
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-sm text-gray-500">
+                Finley can make mistakes. Check important info.
+              </p>
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 font-semibold text-white shadow-lg transition hover:shadow-xl disabled:opacity-60"
+                disabled={isTyping || !inputValue.trim()}
+              >
+                {isTyping ? 'Finley is replying...' : 'Send to Finley'}
+                <Send className="h-4 w-4" />
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
     </div>
   );
 }
