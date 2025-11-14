@@ -34,10 +34,7 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 
 ## 🧩 Tech Stack  
 ### **Frontend**
-- **React + TypeScript (Vite)** — Fast, modern UI
-- **TailwindCSS** — Utility-first styling
-- **React Router** — Client-side navigation
-- **Lucide Icons** — Icon set for UI
+- **React + TypeScript (Vite) + TailwindCSS** — Fast, modern UI
 
 ### **Backend & Services**
 - **Supabase**
