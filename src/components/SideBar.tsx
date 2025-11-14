@@ -98,6 +98,32 @@ export default function SideBar() {
     };
   }, []);
 
+  useEffect(() => {
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        // User just logged out
+        setProfile(null);
+        setUserEmail(null);
+        return;
+      }
+
+      // User logged in or session changed → fetch profile again
+      setUserEmail(session.user.email ?? null);
+
+      supabase
+        .from('user_profiles')
+        .select('display_name')
+        .eq('id', session.user.id)
+        .maybeSingle()
+        .then(({ data }) => setProfile(data));
+    });
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+
   const initials = profile?.display_name
     ? profile.display_name
         .split(' ')
@@ -180,7 +206,10 @@ export default function SideBar() {
           collapsed ? 'flex items-center justify-center px-2 py-2' : ''
         }`}
       >
-        <div className="flex items-center gap-3">
+        <Link
+          to="/account"
+          className="flex items-center gap-3 hover:bg-gray-100/70 rounded-2xl p-2 transition"
+        >
           <Avatar className="h-10 w-10 bg-indigo-100 text-indigo-600">
             {loadingProfile ? (
               <AvatarFallback>
@@ -200,28 +229,17 @@ export default function SideBar() {
                   <p className="text-sm font-semibold text-gray-900">
                     {profile?.display_name || userEmail}
                   </p>
-                  <p className="text-xs text-gray-500">Synced</p>
+                  <p className="text-xs text-gray-500">View account</p>
                 </>
               ) : (
                 <>
-                  <Link
-                    to="/login"
-                    className="text-sm font-semibold text-indigo-600 hover:underline"
-                  >
-                    Guest Explorer
-                  </Link>
-                  <br />
-                  <Link
-                    to="/login"
-                    className="text-xs text-indigo-500 hover:underline"
-                  >
-                    Sign in to sync achievements
-                  </Link>
+                  <p className="text-sm font-semibold text-indigo-600">Guest Explorer</p>
+                  <p className="text-xs text-indigo-500">Sign in to sync</p>
                 </>
               )}
             </div>
           )}
-        </div>
+        </Link>
       </div>
     </aside>
   );

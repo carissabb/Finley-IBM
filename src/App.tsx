@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ExpensesPage from './pages/Expenses';
 import SignupPage from './pages/SignupPage';
+import AccountPage from './pages/AccountPage';
 
 function App() {
 	return (
@@ -32,6 +33,7 @@ function AppContent() {
   			<Route path="/signup" element={<SignupPage />} />
 			<Route path="/expenses" element={<ExpensesPage />} />
 			<Route path="/achievements" element={<Achievements />} />
+			<Route path="/account" element={<AccountPage />} />
 		</Routes>
 	);
 
