@@ -25,12 +25,12 @@ Finley addresses this problem by combining **AI-driven financial insights**, **b
   <img src="https://github.com/user-attachments/assets/e02046ef-2e34-4304-b17e-bc02201fd7a3" width="900"/>
 </p>
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4f11e90d-c27a-4b1a-82ec-0b7cd6ee38bb" width="460"/>
-  <img src="https://github.com/user-attachments/assets/4f10957e-64af-4df4-b88e-ffdbaee3beff" width="450"/>
+  <img src="https://github.com/user-attachments/assets/4f11e90d-c27a-4b1a-82ec-0b7cd6ee38bb" width="435"/>
+  <img src="https://github.com/user-attachments/assets/4f10957e-64af-4df4-b88e-ffdbaee3beff" width="440"/>
 </p>
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/5e0c6274-2812-4297-bc8a-9de74c4d930b" width="450"/>
-  <img src="https://github.com/user-attachments/assets/40b5711b-f441-49c0-ace8-83031d1e6ebd" width="430"/>
+  <img src="https://github.com/user-attachments/assets/5e0c6274-2812-4297-bc8a-9de74c4d930b" width="440"/>
+  <img src="https://github.com/user-attachments/assets/40b5711b-f441-49c0-ace8-83031d1e6ebd" width="420"/>
 </p>
 
 
