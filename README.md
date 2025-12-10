@@ -30,8 +30,9 @@ Finley addresses this problem by combining **AI-driven financial insights**, **b
 </p>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5e0c6274-2812-4297-bc8a-9de74c4d930b" width="400"/>
-  <img src="https://github.com/user-attachments/assets/40b5711b-f441-49c0-ace8-83031d1e6ebd" width="400"/>
+  <img src="https://github.com/user-attachments/assets/9497b0dc-2212-446c-bc7e-8699d4454162" width="400"/>
 </p>
+
 
 
 --- 
@@ -41,7 +42,7 @@ Finley addresses this problem by combining **AI-driven financial insights**, **b
 Finley acts as your **AI financial friend** — not a formal advisor, but a supportive companion who:  
 - Chats naturally about budgeting, saving, and spending habits.  
 - Helps users create realistic budgets and track goals.  
-- Rewards consistency through **Gamified Achievements**, turning financial progress into a fun, confidence-building journey.  
+- Rewards consistency through gamified achievements, turning financial progress into a fun, confidence-building journey.  
 
 ---
 
@@ -57,7 +58,7 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 
 ## 🧩 Tech Stack  
 ### **Frontend**
-- **React + TypeScript (Vite) + TailwindCSS** — Fast, modern UI
+- **React + TypeScript (Vite) + TailwindCSS**
 
 ### **Backend & Services**
 - **Supabase**
@@ -71,9 +72,6 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 ### **AI**
 - **IBM watsonx.ai (Granite 8B)**
   - Powers Finley’s financial insights and assistant responses
-
-### **Tooling**
-- **Environment Variables (.env)** for Supabase + Watsonx keys
 
 ---
 
