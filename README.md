@@ -15,7 +15,7 @@ Finley addresses this problem by combining **AI-driven financial insights**, **b
 
 ## 🎥 Demo
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/2cb63caa-70c0-4531-b4dd-896749dd49b7" width="650"/>
+  <img src="https://github.com/user-attachments/assets/b13c3ac9-671f-4ca2-a321-f28bb31203aa" width="650"/>
 </p>
 
 ---
