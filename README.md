@@ -11,6 +11,25 @@ The goal of this challenge is to **help young adults better track, interpret, an
 
 Finley addresses this problem by combining **AI-driven financial insights**, **budget tracking**, and **positive reinforcement** to make money management approachable and motivating. Instead of overwhelming users with numbers, Finley encourages them to celebrate small wins and build consistent financial habits.  
 
+--- 
+
+## 💬 About Finley  
+
+Finley acts as your **AI financial friend** — not a formal advisor, but a supportive companion who:  
+- Chats naturally about budgeting, saving, and spending habits.  
+- Helps users create realistic budgets and track goals.  
+- Rewards consistency through gamified achievements, turning financial progress into a fun, confidence-building journey.  
+
+---
+
+## 🌟 Key Features  
+
+| Page | Description |
+|------|--------------|
+| **Chat Page** | Finley’s main interface — a friendly AI chatbot that answers finance questions and provides daily motivational tips. |
+| **Budget Tracker** | Simple calculator that helps users create achievable savings plans and visualize weekly goals. |
+| **Gamified Achievements** | Fun badge system that rewards users for setting goals, staying consistent, and checking in with Finley. |
+
 ---
 
 ## 🎥 Demo
@@ -32,27 +51,6 @@ Finley addresses this problem by combining **AI-driven financial insights**, **b
   <img src="https://github.com/user-attachments/assets/5e0c6274-2812-4297-bc8a-9de74c4d930b" width="400"/>
   <img src="https://github.com/user-attachments/assets/9497b0dc-2212-446c-bc7e-8699d4454162" width="400"/>
 </p>
-
-
-
---- 
-
-## 💬 About Finley  
-
-Finley acts as your **AI financial friend** — not a formal advisor, but a supportive companion who:  
-- Chats naturally about budgeting, saving, and spending habits.  
-- Helps users create realistic budgets and track goals.  
-- Rewards consistency through gamified achievements, turning financial progress into a fun, confidence-building journey.  
-
----
-
-## 🌟 Key Features  
-
-| Page | Description |
-|------|--------------|
-| **Chat Page** | Finley’s main interface — a friendly AI chatbot that answers finance questions and provides daily motivational tips. |
-| **Budget Tracker** | Simple calculator that helps users create achievable savings plans and visualize weekly goals. |
-| **Gamified Achievements** | Fun badge system that rewards users for setting goals, staying consistent, and checking in with Finley. |
 
 ---
 
@@ -101,8 +99,6 @@ VITE_IBM_MODEL_ID=ibm/"your-ibm-model-id"
 AGENT_API_KEY="your-secret-key"
 ```
 
-> ⚠️ **Never commit your `.env` file.** It’s already ignored via `.gitignore`.  
-
 ---
 
 ### 4️⃣ Run the express server
@@ -121,21 +117,6 @@ The app will start on **http://localhost:5173** (or whichever port your terminal
 
 ---
 
-## 🔒 Environment & Security
-
-- Keep all API keys and sensitive data in **`.env`** files (excluded from git).  
-- Replace placeholders in `.env.example` with your own credentials in `.env` (create this file) to connect Finley to IBM watsonx Orchestrate via API.  
-- **Do not hardcode** secrets in the codebase; always read them from environment variables.  
-
----
-
-## 🧭 Project Purpose
-
-Built for **IBM’s AI Experiential Learning Lab (Challenge 3)** to show how AI can empower financial literacy and promote long-term wellness.  
-
-Finley makes finance **personal, friendly, and motivating** — making budgeting feel simple, stress-free, and totally doable. 
-
----
 
 ## 👩‍💻 Contributors
 
