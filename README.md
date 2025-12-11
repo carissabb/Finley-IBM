@@ -32,6 +32,25 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
 
 ---
 
+## 🧩 Tech Stack  
+### **Frontend**
+- **React + TypeScript (Vite) + TailwindCSS**
+
+### **Backend & Services**
+- **Supabase**
+  - Authentication (email/password + Google OAuth)
+  - Postgres database with Row-Level Security (RLS)
+  - Tables for user profiles, budgets, savings goals, achievements, expenses
+
+- **Node.js + Express**
+  - Lightweight backend proxy for secure requests to IBM’s ML deployment
+
+### **AI**
+- **IBM watsonx.ai (Granite 8B)**
+  - Powers Finley’s financial insights and assistant responses
+
+---
+
 ## 🎥 Demo
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b13c3ac9-671f-4ca2-a321-f28bb31203aa" width="900"/>
@@ -51,25 +70,6 @@ Finley acts as your **AI financial friend** — not a formal advisor, but a supp
   <img src="https://github.com/user-attachments/assets/5e0c6274-2812-4297-bc8a-9de74c4d930b" width="400"/>
   <img src="https://github.com/user-attachments/assets/9497b0dc-2212-446c-bc7e-8699d4454162" width="400"/>
 </p>
-
----
-
-## 🧩 Tech Stack  
-### **Frontend**
-- **React + TypeScript (Vite) + TailwindCSS**
-
-### **Backend & Services**
-- **Supabase**
-  - Authentication (email/password + Google OAuth)
-  - Postgres database with Row-Level Security (RLS)
-  - Tables for user profiles, budgets, savings goals, achievements, expenses
-
-- **Node.js + Express**
-  - Lightweight backend proxy for secure requests to IBM’s ML deployment
-
-### **AI**
-- **IBM watsonx.ai (Granite 8B)**
-  - Powers Finley’s financial insights and assistant responses
 
 ---
 
